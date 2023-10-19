@@ -3,7 +3,7 @@
 #include "Shaikhutdinov_Car.h"
 #include "Shaikhutdinov_UsedCar.h"
 
-class Warehouse
+class Shaikhutdinov_Warehouse
 {
 	vector <shared_ptr<Shaikhutdinov_Car>> warehouse;
 public:

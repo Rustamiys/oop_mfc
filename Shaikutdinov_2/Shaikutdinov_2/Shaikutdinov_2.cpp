@@ -49,7 +49,7 @@ int main()
 			std::locale::global(std::locale("Russian_Russia.1251"));
 			SetConsoleCP(1251);
 			SetConsoleOutputCP(1251);
-			Warehouse warehouse;
+			Shaikhutdinov_Warehouse warehouse;
 
 			while (true) {
 				system("cls");
@@ -80,11 +80,14 @@ int main()
 				}
 				case 4:
 				{
+					warehouse.Clear();
 					cout << "Filename: ";
 					cin.clear();
 					cin.ignore(1024, '\n');
 					string filename;
 					getline(cin, filename);
+					//fstream(filename, fout);
+
 					CString fname(filename.c_str());
 					warehouse.Load(fname);
 					break;

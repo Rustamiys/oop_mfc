@@ -21,8 +21,8 @@ void Shaikhutdinov_UsedCar::input(){
 
 void Shaikhutdinov_UsedCar::print(){
 	Shaikhutdinov_Car::print();
-	cout << "Количество владельцев : " << getNumberOfOwners() << endl
-		<< "Пробег: " << getMileage() << endl;
+	cout << "Количество владельцев : " << number_of_owners << endl
+		<< "Пробег: " << mileage << endl;
 }
 
 void Shaikhutdinov_UsedCar::Serialize(CArchive& ar)

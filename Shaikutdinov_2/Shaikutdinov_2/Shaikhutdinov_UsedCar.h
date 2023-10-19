@@ -13,7 +13,7 @@ public:
 	void setMileage(float mileage);
 	void input();
 	void print();
-	virtual void Serialize(CArchive& ar) override;
+	void Serialize(CArchive& ar);
 
 private:
 	int number_of_owners;

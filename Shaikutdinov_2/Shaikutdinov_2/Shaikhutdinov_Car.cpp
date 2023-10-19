@@ -29,34 +29,29 @@ int Shaikhutdinov_Car::getPower() { return this->power; }
 int Shaikhutdinov_Car::getProductionYear() { return this->production_year; }
 
 void Shaikhutdinov_Car::input() {
-	string make;
-	string model;
+	string make1;
+	string model1;
 	
 	cin.clear();
 	cin.ignore(1024, '\n');
 	cout << "Марка автомобиля: ";
-	getline(cin, make);
+	getline(cin, make1);
 	cout << "Модель автомобиля: ";
-	getline(cin, model);
-	int power = GetCorrectNumber("Мощность (л.с): ", 0, 10000);
-	float engine_capacity = GetCorrectNumber("Объем двигателя(л): ", 0.1, 10.0);
-	int production_year = GetCorrectNumber("Год выпуска: ", 1800, 2023);
-	CString make1(make.c_str());
-	CString model1(model.c_str());
-	setMake(make1);
-	setModel(model1);
-	setEngineCapacity(engine_capacity);
-	setPower(power);
-	setProductionYear(production_year);
+	getline(cin, model1);
+	power = GetCorrectNumber("Мощность (л.с): ", 0, 10000);
+	engine_capacity = GetCorrectNumber("Объем двигателя(л): ", 0.1, 10.0);
+	production_year = GetCorrectNumber("Год выпуска: ", 1800, 2023);
+	make = make1.c_str();
+	model = model1.c_str();
 }
 
 
 void Shaikhutdinov_Car::print() {
-	cout << "Марка: " << getMake() << endl
-		<< "Модель: " << getModel() << endl
-		<< "Мощность: " << getPower() << endl
-		<< "Объем двигателя: " << getEngineCapacity() << endl
-		<< "Год выпуска: " << getProductionYear() << endl;
+	cout << "Марка: " << make << endl
+		<< "Модель: " << model << endl
+		<< "Мощность: " << power << endl
+		<< "Объем двигателя: " << engine_capacity << endl
+		<< "Год выпуска: " << production_year << endl;
 }
 
 void Shaikhutdinov_Car::Serialize(CArchive& ar)
