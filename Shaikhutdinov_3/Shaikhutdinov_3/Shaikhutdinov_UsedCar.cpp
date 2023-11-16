@@ -6,22 +6,32 @@ Shaikhutdinov_UsedCar::Shaikhutdinov_UsedCar() : Shaikhutdinov_Car::Shaikhutdino
 	mileage = 0;
 }
 
-int Shaikhutdinov_UsedCar::getLenCStr(int i)
+CString Shaikhutdinov_UsedCar::getCStr(int i)
 {
-	int q = Shaikhutdinov_Car::getLenCStr(i);
-	if (q) {
-		return q;
+	CString stringT;
+	if (i<5) {
+		return Shaikhutdinov_Car::getCStr(i);
 	}
-	if (i == 5) {
-		string q = to_string(mileage);
-		return q.size();
+	else if (i == 5) {
+		stringT.Format(L"%i", number_of_owners);
+		return stringT;
 	}
 	else if (i == 6) {
-		string q = to_string(number_of_owners);
-		return q.size();
+		stringT.Format(L"%f", mileage);
+		return stringT;
 	}
 }
 
+void Shaikhutdinov_UsedCar::Draw(CDC* pDC, int& i, vector<int> vec)
+{
+	
+	CString stringT;
+	stringT.Format(L"%i", number_of_owners);
+	pDC->TextOutW(vec[5], 30 + 20 * i, stringT);
+	stringT.Format(L"%f", mileage);
+	pDC->TextOutW(vec[6], 30 + 20 * i, stringT);
+	Shaikhutdinov_Car::Draw(pDC, i, vec);
+}
 
 void Shaikhutdinov_UsedCar::input() {
 	Shaikhutdinov_Car::input();

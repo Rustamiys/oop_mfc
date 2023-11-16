@@ -7,11 +7,12 @@ public:
 	DECLARE_SERIAL(Shaikhutdinov_UsedCar);
 	Shaikhutdinov_UsedCar();
 
-	int getLenCStr(int i);
+	CString getCStr(int i);
 
 	void input();
 	void print();
 	void Serialize(CArchive& ar);
+	void Draw(CDC* pDC, int& i, vector<int> vec);
 
 private:
 	int number_of_owners;

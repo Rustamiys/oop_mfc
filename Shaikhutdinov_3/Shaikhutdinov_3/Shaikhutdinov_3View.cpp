@@ -55,16 +55,20 @@ void CShaikhutdinov3View::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 	pDoc->warehouse.Draw(pDC);
+	CSize sizeTotal = pDoc->warehouse.Draw(pDC);
+
+	SetScrollSizes(MM_TEXT, sizeTotal);
 	// TODO: добавьте здесь код отрисовки для собственных данных
 }
 
 void CShaikhutdinov3View::OnInitialUpdate()
 {
 	CScrollView::OnInitialUpdate();
-
+	//CShaikhutdinov3Doc* pDoc;
 	CSize sizeTotal;
-	// TODO: рассчитайте полный размер этого представления
-	sizeTotal.cx = sizeTotal.cy = 100;
+	
+	//int size_scroll = pDoc->warehouse.Load();
+
 	SetScrollSizes(MM_TEXT, sizeTotal);
 }
 

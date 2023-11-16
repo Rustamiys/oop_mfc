@@ -12,8 +12,9 @@ public:
 
 	virtual void input();
 	virtual void print();
-	int getLenCStr(int i);
-
+	CString getCStr(int i);
+	virtual void Draw(CDC* pDC, int& i, vector<int> vec);
+	int x;
 
 private:
 	float engine_capacity;

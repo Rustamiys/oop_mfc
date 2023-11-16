@@ -1,6 +1,9 @@
 ﻿#include "pch.h"
 #include "Shaikhutdinov_Warehouse.h"
 #include <algorithm>
+#include <memory>
+#include <functional>
+
 
 void Shaikhutdinov_Warehouse::Input()
 {
@@ -43,31 +46,35 @@ void Shaikhutdinov_Warehouse::Load(CArchive &ar)
 	cout << "Выполнено!" << endl;
 }
 
-void Shaikhutdinov_Warehouse::Draw(CDC* pDC)
+CSize Shaikhutdinov_Warehouse::Draw(CDC* pDC)
 {
 	vector<CString> name = { L"Марка" , L"Модель" , L"Мощность(л.с)" ,L"Объем двигателя(л)" , 
 	L"Год выпуска" , L"Количество владельцев" , L"Пробег(км):" };
+	
+	vector<int> position = {};
 	int x = 10; int y = 10;
+	position.push_back(x);
 	for (int i = 0; i < name.size(); i++) {
 		pDC->TextOutW(x, y, name[i]);
-		x += 12 * MaxStr(i, name[i].GetLength());
+		position.push_back(10 + x + 11 * MaxStr(i, name[i].GetLength()));
+		x = position[i+1];
 	}
-	x = 10;
-	y = 30;
-	for (int i = 0; i < name.size(); i++) {
-		pDC->TextOutW(x, y, name[i]);
-		x += 12 * MaxStr(i, name[i].GetLength());
-	}
+
+	int i = 0;
+	for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position));
+	POINT sizeAll;
+	sizeAll.x = position[7];
+	sizeAll.y = 50 + 20 * warehouse.size();
+	return sizeAll;
 }
+
 
 int Shaikhutdinov_Warehouse::MaxStr(int row, int max1)
 {
-
 	for (auto pShaikhutdinov_Car : warehouse) {
-		int len = pShaikhutdinov_Car->getLenCStr(row);
+		int len = pShaikhutdinov_Car->getCStr(row).GetLength();
 		if (max1 < len) max1 = len;
 	}
-
 	return max1;
 }
 

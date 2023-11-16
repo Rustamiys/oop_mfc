@@ -15,23 +15,46 @@ Shaikhutdinov_Car::~Shaikhutdinov_Car()
 {
 }
 
-int Shaikhutdinov_Car::getLenCStr(int i)
+
+
+CString Shaikhutdinov_Car::getCStr(int i)
 {
-	if (i == 0) { return make.GetLength(); }
-	else if (i == 1) { return model.GetLength(); }
+	CString stringT;
+
+	if (i == 0) { return make; }
+	else if (i == 1) { return model; }
 	else if (i == 2) {
-		string q = to_string(engine_capacity);
-		return q.size();
+		stringT.Format(L"%i", power);
+		return stringT;
 	}
-	else if (i == 3) { 
-		string q = to_string(power);
-		return q.size();
+	else if (i == 3) {
+		stringT.Format(L"%f", engine_capacity);
+		return stringT;
 	}
 	else if (i == 4) { 
-		string q = to_string(production_year);
-		return q.size();
+		stringT.Format(L"%i", production_year);;
+		return stringT;
 	}
-	return 0;
+	else {
+		return L"";
+	}
+}
+
+void Shaikhutdinov_Car::Draw(CDC* pDC, int& i, vector<int> vec)
+{
+	CString stringT;
+	pDC->TextOutW(vec[0], 30 + 20 * i, make);
+	pDC->TextOutW(vec[1], 30 + 20 * i, model);
+	
+	stringT.Format(L"%i", power);
+	pDC->TextOutW(vec[2], 30 + 20 * i, stringT); 
+
+	stringT.Format(L"%f", engine_capacity);
+	pDC->TextOutW(vec[3], 30 + 20 * i, stringT);
+	
+	stringT.Format(L"%i", production_year);
+	pDC->TextOutW(vec[4], 30 + 20 * i, stringT);
+	i++;
 }
 
 

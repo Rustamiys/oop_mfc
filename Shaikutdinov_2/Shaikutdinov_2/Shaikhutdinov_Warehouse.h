@@ -2,6 +2,7 @@
 #include "utils.h"
 #include "Shaikhutdinov_Car.h"
 #include "Shaikhutdinov_UsedCar.h"
+#include "Shaikhutdinov_UsedCar.h"
 
 class Shaikhutdinov_Warehouse
 {

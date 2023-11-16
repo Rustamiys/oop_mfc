@@ -42,7 +42,7 @@ BOOL CShaikhutdinov3Doc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
-
+	warehouse.Clear();
 	// TODO: добавьте код повторной инициализации
 	// (Документы SDI будут повторно использовать этот документ)
 
