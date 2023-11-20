@@ -13,7 +13,7 @@ public:
 	virtual void input();
 	virtual void print();
 	CString getCStr(int i);
-	virtual void Draw(CDC* pDC, int& i, vector<int> vec);
+	virtual void Draw(CDC* pDC, int& i, vector<double> vec, double line_size, double y0);
 	int x;
 
 private:

@@ -51,31 +51,65 @@ CSize Shaikhutdinov_Warehouse::Draw(CDC* pDC)
 	vector<CString> name = { L"Марка" , L"Модель" , L"Мощность(л.с)" ,L"Объем двигателя(л)" , 
 	L"Год выпуска" , L"Количество владельцев" , L"Пробег(км):" };
 	
-	vector<int> position = {};
+	/*vector<int> position = {};
+	int col_size = 10;
+	int lin_size = 20;
 	int x = 10; int y = 10;
+
 	position.push_back(x);
+
+	double mmX = 25.4 / pDC->GetDeviceCaps(LOGPIXELSX);
+	double mmY = 25.4 / pDC->GetDeviceCaps(LOGPIXELSY);
+
+
+
 	for (int i = 0; i < name.size(); i++) {
 		pDC->TextOutW(x, y, name[i]);
-		position.push_back(10 + x + 11 * MaxStr(i, name[i].GetLength()));
-		x = position[i+1];
+		x += col_size + MaxStr(pDC, i, pDC->GetTextExtent(name[i]).cx);
+		position.push_back(x);
 	}
-
 	int i = 0;
-	for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position));
-	POINT sizeAll;
-	sizeAll.x = position[7];
-	sizeAll.y = 50 + 20 * warehouse.size();
-	return sizeAll;
+	y += lin_size;
+	for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position, lin_size, y));
+	POINT pos;
+	pos.x = position[7]; pos.y = y + lin_size * i;
+	return pos;*/
+	pDC->SetMapMode(MM_LOMETRIC);
+
+
+	vector<double> position = {};
+	double mmX = 10 * 25.4 / pDC->GetDeviceCaps(LOGPIXELSX);
+	double mmY = 10 * 25.4 / pDC->GetDeviceCaps(LOGPIXELSY);
+	
+	double col_size = 10 * mmX;
+	double lin_size = 30 * mmY;
+	double x = 10 * mmX; double y = 10 * mmY;
+
+	position.push_back(x);
+
+	for (int i = 0; i < name.size(); i++) {
+		pDC->TextOutW(x, -y, name[i]);
+		x += col_size + mmX * MaxStr(pDC, i, pDC->GetTextExtent(name[i]).cx);
+		position.push_back(x);
+	}
+	int i = 0;
+	y += lin_size;
+	for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position, lin_size, y));
+	POINT pos;
+	pos.x = position[7]; pos.y = y + lin_size * (i+5);
+	return pos;
 }
 
 
-int Shaikhutdinov_Warehouse::MaxStr(int row, int max1)
+int Shaikhutdinov_Warehouse::MaxStr(CDC* pDC, int row, int max)
 {
 	for (auto pShaikhutdinov_Car : warehouse) {
-		int len = pShaikhutdinov_Car->getCStr(row).GetLength();
-		if (max1 < len) max1 = len;
+		CSize len = pDC->GetTextExtent(pShaikhutdinov_Car->getCStr(row));
+		if (max < len.cx) 
+			max = len.cx;
 	}
-	return max1;
+
+	return max;
 }
 
 

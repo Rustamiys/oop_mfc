@@ -40,20 +40,20 @@ CString Shaikhutdinov_Car::getCStr(int i)
 	}
 }
 
-void Shaikhutdinov_Car::Draw(CDC* pDC, int& i, vector<int> vec)
+void Shaikhutdinov_Car::Draw(CDC* pDC, int& i, vector<double> vec, double line_size, double y0)
 {
 	CString stringT;
-	pDC->TextOutW(vec[0], 30 + 20 * i, make);
-	pDC->TextOutW(vec[1], 30 + 20 * i, model);
+	pDC->TextOutW(vec[0], -(y0 + line_size * i), make);
+	pDC->TextOutW(vec[1], -(y0 + line_size * i), model);
 	
 	stringT.Format(L"%i", power);
-	pDC->TextOutW(vec[2], 30 + 20 * i, stringT); 
+	pDC->TextOutW(vec[2], -(y0 + line_size * i), stringT);
 
 	stringT.Format(L"%f", engine_capacity);
-	pDC->TextOutW(vec[3], 30 + 20 * i, stringT);
+	pDC->TextOutW(vec[3], -(y0 + line_size * i), stringT);
 	
 	stringT.Format(L"%i", production_year);
-	pDC->TextOutW(vec[4], 30 + 20 * i, stringT);
+	pDC->TextOutW(vec[4], -(y0 + line_size * i), stringT);
 	i++;
 }
 

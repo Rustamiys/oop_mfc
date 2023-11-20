@@ -13,5 +13,5 @@ public:
 	void Save(CArchive &ar);
 	void Load(CArchive &ar);
 	CSize Draw(CDC* pDC);
-	int MaxStr(int row, int max1);
+	int MaxStr(CDC* pDC, int row, int max);
 };

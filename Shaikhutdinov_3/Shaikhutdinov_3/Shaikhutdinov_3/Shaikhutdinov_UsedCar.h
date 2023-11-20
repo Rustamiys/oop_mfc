@@ -12,7 +12,7 @@ public:
 	void input();
 	void print();
 	void Serialize(CArchive& ar);
-	void Draw(CDC* pDC, int& i, vector<int> vec);
+	void Draw(CDC* pDC, int& i, vector<double> vec, double line_size, double y0);
 
 private:
 	int number_of_owners;
