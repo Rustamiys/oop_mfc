@@ -74,17 +74,18 @@ CSize Shaikhutdinov_Warehouse::Draw(CDC* pDC)
 	POINT pos;
 	pos.x = position[7]; pos.y = y + lin_size * i;
 	return pos;*/
-	pDC->SetMapMode(MM_LOMETRIC);
+	//pDC->SetMapMode(MM_LOMETRIC);
 
 
 	vector<double> position = {};
-	double mmX = 10 * 25.4 / pDC->GetDeviceCaps(LOGPIXELSX);
-	double mmY = 10 * 25.4 / pDC->GetDeviceCaps(LOGPIXELSY);
+	double mmX = 254 / pDC->GetDeviceCaps(LOGPIXELSX);
+	double mmY = 254 / pDC->GetDeviceCaps(LOGPIXELSY);
 	
-	double col_size = 10 * mmX;
-	double lin_size = 30 * mmY;
-	double x = 10 * mmX; double y = 10 * mmY;
+	double col_size = 50 * mmX;
+	double lin_size = 150 * mmY;
 
+	double x = 10 * mmX; double y = 10 * mmY;
+	POINT pos;
 	position.push_back(x);
 
 	for (int i = 0; i < name.size(); i++) {
@@ -92,11 +93,23 @@ CSize Shaikhutdinov_Warehouse::Draw(CDC* pDC)
 		x += col_size + mmX * MaxStr(pDC, i, pDC->GetTextExtent(name[i]).cx);
 		position.push_back(x);
 	}
+	
+	pos.y = y;
+	for (auto pShaikhutdinov_Car : warehouse) {
+		for (int i = 0; i < 7; i++) {
+			CSize len = pDC->GetTextExtent(pShaikhutdinov_Car->getCStr(i));
+			if (pos.y < len.cy)
+				pos.y = len.cy;
+		}
+	}
+
 	int i = 0;
 	y += lin_size;
+	lin_size += pos.y;
 	for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position, lin_size, y));
-	POINT pos;
-	pos.x = position[7]; pos.y = y + lin_size * (i+5);
+
+	pos.x = position[7] - col_size; 
+	pos.y = (warehouse.size()) ? pos.y + y + lin_size * (warehouse.size() - 1) : y + pos.y - lin_size;
 	return pos;
 }
 
