@@ -50,47 +50,18 @@ CSize Shaikhutdinov_Warehouse::Draw(CDC* pDC)
 {
 	vector<CString> name = { L"Марка" , L"Модель" , L"Мощность(л.с)" ,L"Объем двигателя(л)" , 
 	L"Год выпуска" , L"Количество владельцев" , L"Пробег(км):" };
-	
-	/*vector<int> position = {};
+
+	vector<int> position = {};
 	int col_size = 10;
 	int lin_size = 20;
 	int x = 10; int y = 10;
 
+	POINT pos;
 	position.push_back(x);
-
-	double mmX = 25.4 / pDC->GetDeviceCaps(LOGPIXELSX);
-	double mmY = 25.4 / pDC->GetDeviceCaps(LOGPIXELSY);
-
-
 
 	for (int i = 0; i < name.size(); i++) {
 		pDC->TextOutW(x, y, name[i]);
 		x += col_size + MaxStr(pDC, i, pDC->GetTextExtent(name[i]).cx);
-		position.push_back(x);
-	}
-	int i = 0;
-	y += lin_size;
-	for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position, lin_size, y));
-	POINT pos;
-	pos.x = position[7]; pos.y = y + lin_size * i;
-	return pos;*/
-	//pDC->SetMapMode(MM_LOMETRIC);
-
-
-	vector<double> position = {};
-	double mmX = 254 / pDC->GetDeviceCaps(LOGPIXELSX);
-	double mmY = 254 / pDC->GetDeviceCaps(LOGPIXELSY);
-	
-	double col_size = 50 * mmX;
-	double lin_size = 150 * mmY;
-
-	double x = 10 * mmX; double y = 10 * mmY;
-	POINT pos;
-	position.push_back(x);
-
-	for (int i = 0; i < name.size(); i++) {
-		pDC->TextOutW(x, -y, name[i]);
-		x += col_size + mmX * MaxStr(pDC, i, pDC->GetTextExtent(name[i]).cx);
 		position.push_back(x);
 	}
 	
@@ -111,6 +82,41 @@ CSize Shaikhutdinov_Warehouse::Draw(CDC* pDC)
 	pos.x = position[7] - col_size; 
 	pos.y = (warehouse.size()) ? pos.y + y + lin_size * (warehouse.size() - 1) : y + pos.y - lin_size;
 	return pos;
+
+	//vector<double> position = {};
+	//double mmX = 254 / pDC->GetDeviceCaps(LOGPIXELSX);
+	//double mmY = 254 / pDC->GetDeviceCaps(LOGPIXELSY);
+	//
+	//double col_size = 50 * mmX;
+	//double lin_size = 50 * mmY;
+
+	//double x = 10 * mmX; double y = 10 * mmY;
+	//POINT pos;
+	//position.push_back(x);
+
+	//for (int i = 0; i < name.size(); i++) {
+	//	pDC->TextOutW(x, -y, name[i]);
+	//	x += col_size + mmX * MaxStr(pDC, i, pDC->GetTextExtent(name[i]).cx);
+	//	position.push_back(x);
+	//}
+	//
+	//pos.y = y;
+	//for (auto pShaikhutdinov_Car : warehouse) {
+	//	for (int i = 0; i < 7; i++) {
+	//		CSize len = pDC->GetTextExtent(pShaikhutdinov_Car->getCStr(i));
+	//		if (pos.y < len.cy)
+	//			pos.y = len.cy;
+	//	}
+	//}
+
+	//int i = 0;
+	//y += lin_size;
+	//lin_size += pos.y;
+	//for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position, lin_size, y));
+
+	//pos.x = position[7] - col_size; 
+	//pos.y = (warehouse.size()) ? pos.y + y + lin_size * (warehouse.size() - 1) : y + pos.y - lin_size;
+	//return pos;
 }
 
 

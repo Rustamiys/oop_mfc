@@ -22,13 +22,13 @@ CString Shaikhutdinov_UsedCar::getCStr(int i)
 	}
 }
 
-void Shaikhutdinov_UsedCar::Draw(CDC* pDC, int& i, vector<double> vec, double line_size, double y0)
+void Shaikhutdinov_UsedCar::Draw(CDC* pDC, int& i, vector<int> vec, int line_size, int y0)
 {	
 	CString stringT;
 	stringT.Format(L"%i", number_of_owners);
-	pDC->TextOutW(vec[5], -(y0 + line_size * i), stringT);
+	pDC->TextOutW(vec[5], (y0 + line_size * i), stringT);
 	stringT.Format(L"%f", mileage);
-	pDC->TextOutW(vec[6], -(y0 + line_size * i), stringT);
+	pDC->TextOutW(vec[6], (y0 + line_size * i), stringT);
 	Shaikhutdinov_Car::Draw(pDC, i, vec, line_size, y0);
 }
 

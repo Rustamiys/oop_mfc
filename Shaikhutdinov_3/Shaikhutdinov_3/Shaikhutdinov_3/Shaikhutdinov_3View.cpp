@@ -56,8 +56,8 @@ void CShaikhutdinov3View::OnDraw(CDC* pDC)
 		return;
 	pDoc->warehouse.Draw(pDC);
 	CSize sizeTotal = pDoc->warehouse.Draw(pDC);
-
-	SetScrollSizes(MM_LOMETRIC, sizeTotal);
+	SetScrollSizes(MM_TEXT, sizeTotal);
+	//SetScrollSizes(MM_LOMETRIC, sizeTotal);
 	// TODO: добавьте здесь код отрисовки для собственных данных
 }
 
@@ -68,8 +68,8 @@ void CShaikhutdinov3View::OnInitialUpdate()
 	CSize sizeTotal;
 	
 	//int size_scroll = pDoc->warehouse.Load();
-
-	SetScrollSizes(MM_LOMETRIC, sizeTotal);
+	SetScrollSizes(MM_TEXT, sizeTotal);
+	//SetScrollSizes(MM_LOMETRIC, sizeTotal);
 }
 
 
