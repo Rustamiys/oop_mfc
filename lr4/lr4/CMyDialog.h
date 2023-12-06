@@ -32,6 +32,7 @@ public:
 	CButton ADD_BUTTON;
 	CButton CLOSE_BUTTON;
 	virtual BOOL OnInitDialog();
+	void FillListBox(int i);
 	afx_msg void OnBnClickedDeleteButton();
 	afx_msg void OnBnClickedCloseButton();
 	afx_msg void OnBnClickedSaveButton();

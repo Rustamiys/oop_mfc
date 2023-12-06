@@ -82,13 +82,19 @@ void CMyDialog::EditShow(bool show) {
 BOOL CMyDialog::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
+	FillListBox(0);
+	OnLbnSelchangeList1();
+	return TRUE;
+}
+
+void CMyDialog::FillListBox(int i) {
 	if (!pDoc->warehouse.Empty())
 	{
 		for (int i = 0; i < pDoc->warehouse.Size(); ++i)
 		{
 			CString s = pDoc->warehouse.GetCStr(i, 0) + L" " + pDoc->warehouse.GetCStr(i, 1);
 			ListBox1.AddString(s);
-			ListBox1.SetCurSel(0);
+			ListBox1.SetCurSel(i);
 		}
 	}
 	else {
@@ -96,10 +102,7 @@ BOOL CMyDialog::OnInitDialog()
 		EditNOwners.ShowWindow(SW_HIDE);
 		EditMileage.ShowWindow(SW_HIDE);
 	}
-	OnLbnSelchangeList1();
-	return TRUE;
 }
-
 
 void CMyDialog::OnLbnSelchangeList1()
 {
@@ -112,7 +115,13 @@ void CMyDialog::OnLbnSelchangeList1()
 
 void CMyDialog::FillEdit(int n)
 {
-	if (!pDoc->warehouse.Size()) { return; }
+	if (!pDoc->warehouse.Size()) { 
+		ClearEdit();
+		EditShow(FALSE);
+		EditNOwners.ShowWindow(SW_HIDE);
+		EditMileage.ShowWindow(SW_HIDE);
+		return;
+	}
 	if (n >= 0) {
 		EditMake.SetWindowTextW(pDoc->warehouse.GetCStr(n, 0));
 		EditModel.SetWindowTextW(pDoc->warehouse.GetCStr(n, 1));
@@ -132,16 +141,6 @@ void CMyDialog::FillEdit(int n)
 			EditMileage.SetWindowTextW(L"");
 		}
 	}
-	else {
-		ClearEdit();
-		EditMake.ShowWindow(SW_HIDE);
-		EditModel.ShowWindow(SW_HIDE);
-		EditPower.ShowWindow(SW_HIDE);
-		EditEC.ShowWindow(SW_HIDE);
-		EditPYear.ShowWindow(SW_HIDE);
-		EditNOwners.ShowWindow(SW_HIDE);
-		EditMileage.ShowWindow(SW_HIDE);
-	}
 }
 
 
@@ -153,7 +152,8 @@ void CMyDialog::OnBnClickedSaveButton()
 		return;
 	vector<CString> car;
 	CString str;
-
+	int power, pyear, nOwners;
+	float ec, mileage;
 	EditMake.GetWindowTextW(str);
 	car.push_back(str);
 	EditModel.GetWindowTextW(str);
@@ -170,13 +170,29 @@ void CMyDialog::OnBnClickedSaveButton()
 	car.push_back(str);
 
 	bool flag = TRUE;
-
-	if (car[0]!=L"" && car[1]!=L"") {flag == FALSE;}
-	if (EditMileage.IsWindowVisible()) {
-		car[0] = L"safsadsa";
+	power = _wtoi(car[2]); ec = _wtof(car[3]); pyear = _wtoi(car[4]);
+	nOwners = _wtoi(car[5]); mileage = _wtof(car[6]);
+	if (car[0] == L"" || car[1] == L"") { flag = FALSE; }
+	else if (power >= 10000 || power <= 0 || pyear >= 2023 || pyear <= 1800 || ec <= 0.1 || ec >= 10) { flag == FALSE; }
+	else if (EditMileage.IsWindowVisible()) {
+		if (nOwners <= 0 || nOwners >= 1000 || mileage <= 0.0 || mileage >= 10000000.0) { flag = FALSE; }
 	}
 	if (flag) {
+		ListBox1.DeleteString(n);
 		pDoc->warehouse.AddObj(car, n);
+		ListBox1.InsertString(n, pDoc->warehouse.GetCStr(n, 0) + L" " + pDoc->warehouse.GetCStr(n, 1));
+		ListBox1.SetCurSel(n);
+		FillEdit(n);
+	}
+	else {
+		if (n != m) {
+			ListBox1.DeleteString(n);
+			ListBox1.SetCurSel(n-1);
+		}
+		else {
+			ListBox1.SetCurSel(n);
+		}
+		FillEdit(n);
 	}
 }
 

@@ -34,7 +34,7 @@ void Shaikhutdinov_UsedCar::Draw(CDC* pDC, int& i, vector<int> vec, int line_siz
 
 void Shaikhutdinov_UsedCar::input() {
 	Shaikhutdinov_Car::input();
-	number_of_owners = GetCorrectNumber("Количество владельцев: ", 1, 1000);
+	number_of_owners = GetCorrectNumber("Количество владельцев: ", 0, 1000);
 	mileage = GetCorrectNumber("Пробег: ", 0.0, 10000000.0);
 }
 

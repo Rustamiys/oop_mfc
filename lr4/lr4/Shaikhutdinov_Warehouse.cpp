@@ -130,5 +130,12 @@ void Shaikhutdinov_Warehouse::AddObj(const vector<CString> vec, int n) {
 	else
 		pSC = make_shared<Shaikhutdinov_UsedCar>();
 	pSC->add(vec);
-	warehouse.push_back(pSC);
+	if (n < warehouse.size()) {
+		warehouse.erase(warehouse.begin() + n);
+		if (!warehouse.size()) { warehouse.push_back(pSC); }
+		else { warehouse.insert(warehouse.begin() + n, pSC); }
+	}
+	else {
+		warehouse.push_back(pSC);
+	}
 }

@@ -101,7 +101,4 @@ void Clr4View::OnEditMenu()
 }
 
 // Обработчики сообщений Clr4View
-// обработчик исключений
-// readonly
-// 
-//
+
