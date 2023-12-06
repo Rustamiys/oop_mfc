@@ -8,6 +8,7 @@
 // и поиска; позволяет совместно использовать код документа в данным проекте.
 #ifndef SHARED_HANDLERS
 #include "lr4.h"
+#include "CMyDialog.h"
 #endif
 
 #include "lr4Doc.h"
@@ -23,6 +24,7 @@
 IMPLEMENT_DYNCREATE(Clr4View, CScrollView)
 
 BEGIN_MESSAGE_MAP(Clr4View, CScrollView)
+	ON_COMMAND(IDC_CLOSE_BUTTON, &Clr4View::OnEditMenu)
 END_MESSAGE_MAP()
 
 // Создание или уничтожение Clr4View
@@ -90,5 +92,16 @@ Clr4Doc* Clr4View::GetDocument() const // встроена неотлаженн�
 }
 #endif //_DEBUG
 
+void Clr4View::OnEditMenu()
+{
+	CMyDialog EditDialog(GetDocument());
+	EditDialog.DoModal();
+
+	Invalidate();
+}
 
 // Обработчики сообщений Clr4View
+// обработчик исключений
+// readonly
+// 
+//

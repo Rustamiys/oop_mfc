@@ -15,6 +15,8 @@ protected: // создать только из сериализации
 public:
 	Clr4Doc* GetDocument() const;
 
+	void OnEditMenu();
+
 // Операции
 public:
 

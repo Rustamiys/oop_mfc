@@ -38,6 +38,11 @@ void Shaikhutdinov_UsedCar::input() {
 	mileage = GetCorrectNumber("Пробег: ", 0.0, 10000000.0);
 }
 
+void Shaikhutdinov_UsedCar::add(const vector<CString> car) {
+	Shaikhutdinov_Car::add(car);
+	number_of_owners = _wtoi(car[2]);
+	mileage = _wtof(car[3]);
+}
 
 void Shaikhutdinov_UsedCar::print() {
 	Shaikhutdinov_Car::print();

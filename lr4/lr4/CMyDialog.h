@@ -28,14 +28,26 @@ protected:
 public:
 
 	CListBox ListBox1;
-	CButton EDIT_BUTTON;
 	CButton DELETE_BUTTON;
 	CButton ADD_BUTTON;
 	CButton CLOSE_BUTTON;
 	virtual BOOL OnInitDialog();
-	afx_msg void OnBnClickedAddButton();
 	afx_msg void OnBnClickedDeleteButton();
-	afx_msg void OnBnClickedEditButton();
 	afx_msg void OnBnClickedCloseButton();
 	afx_msg void OnBnClickedSaveButton();
+	afx_msg void OnLbnSelchangeList1();
+	void ClearEdit();
+	void EditShow(bool show);
+	void FillEdit(int n);
+	CEdit EditMake;
+	CEdit EditModel;
+	CEdit EditPower;
+	CEdit EditEC;
+	CEdit EditPYear;
+	CEdit EditNOwners;
+	CEdit EditMileage;
+	CButton ADDC_BUTTON;
+	CButton ADDUC_BUTTON;
+	afx_msg void OnBnClickedAdducButton();
+	afx_msg void OnBnClickedAddcButton();
 };

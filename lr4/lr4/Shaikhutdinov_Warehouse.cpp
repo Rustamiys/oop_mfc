@@ -111,6 +111,24 @@ void Shaikhutdinov_Warehouse::Save(CArchive& ar)
 	cout << "Выполнено" << endl;
 }
 
-shared_ptr<Shaikhutdinov_Car> Shaikhutdinov_Warehouse::GetObj(int i) {
-	return warehouse[i];
+CString Shaikhutdinov_Warehouse::GetCStr(int i, int j) {
+	return warehouse[i]->getCStr(j);
+}
+
+int Shaikhutdinov_Warehouse::Size() {
+	return warehouse.size();
+}
+
+void Shaikhutdinov_Warehouse::EraseObj(int i) {
+	warehouse.erase(warehouse.begin() + i);
+}
+
+void Shaikhutdinov_Warehouse::AddObj(const vector<CString> vec, int n) {
+	shared_ptr<Shaikhutdinov_Car> pSC;
+	if (vec[6] == L"")
+		pSC = make_shared<Shaikhutdinov_Car>();
+	else
+		pSC = make_shared<Shaikhutdinov_UsedCar>();
+	pSC->add(vec);
+	warehouse.push_back(pSC);
 }

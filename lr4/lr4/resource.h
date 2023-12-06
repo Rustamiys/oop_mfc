@@ -8,8 +8,6 @@
 #define IDD_DIALOG1                     310
 #define IDC_DELETE_BUTTON               1015
 #define IDC_LIST1                       1016
-#define IDC_EDIT_BUTTON                 1017
-#define IDC_ADD_BUTTON                  1018
 #define IDC_CLOSE_BUTTON                1019
 #define IDC_EDIT1                       1020
 #define IDC_EDIT2                       1021
@@ -19,6 +17,9 @@
 #define IDC_EDIT5                       1025
 #define IDC_EDIT6                       1026
 #define IDC_EDIT7                       1027
+#define IDC_ADDC_BUTTON                 1028
+#define IDC_CLOSE_BUTTON3               1029
+#define IDC_ADDUC_BUTTON                1029
 #define ID_32771                        32771
 
 // Next default values for new objects

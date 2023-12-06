@@ -58,6 +58,7 @@ void Shaikhutdinov_Car::Draw(CDC* pDC, int& i, vector<int> vec, int line_size, i
 }
 
 
+
 void Shaikhutdinov_Car::input() {
 	string make1;
 	string model1;
@@ -73,6 +74,11 @@ void Shaikhutdinov_Car::input() {
 	production_year = GetCorrectNumber("Год производства: ", 1800, 2023);
 	make = make1.c_str();
 	model = model1.c_str();
+}
+
+void Shaikhutdinov_Car::add(const vector<CString> car) {
+	make = car[0]; model = car[1]; power = _wtoi(car[2]);
+	engine_capacity = _wtof(car[3]); production_year = _wtoi(car[4]);
 }
 
 

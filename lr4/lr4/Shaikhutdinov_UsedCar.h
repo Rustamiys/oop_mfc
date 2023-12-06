@@ -10,6 +10,7 @@ public:
 	CString getCStr(int i);
 
 	void input();
+	void add(const vector<CString> car);
 	void print();
 	void Serialize(CArchive& ar);
 	void Draw(CDC* pDC, int& i, vector<int> vec, int line_size, int y0);

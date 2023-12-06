@@ -13,6 +13,10 @@ public:
 	void Save(CArchive& ar);
 	void Load(CArchive& ar);
 	bool Empty();
+	int Size();
+	CString GetCStr(int i, int j);
+	void EraseObj(int i);
+	void AddObj(const vector<CString> vec, int n);
 	CSize Draw(CDC* pDC);
 	int MaxStr(CDC* pDC, int row, int max);
 };

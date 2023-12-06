@@ -139,12 +139,6 @@ protected:
 // Реализация
 protected:
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg void OnBnClickedDeleteButton();
-	afx_msg void OnBnClickedEditButton();
-	afx_msg void OnBnClickedAddButton();
-	afx_msg void OnBnClickedCloseButton();
-	afx_msg void OnBnClickedSaveButton();
 };
 
 CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX)
@@ -157,11 +151,6 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-	ON_BN_CLICKED(IDC_DELETE_BUTTON, &CAboutDlg::OnBnClickedDeleteButton)
-	ON_BN_CLICKED(IDC_EDIT_BUTTON, &CAboutDlg::OnBnClickedEditButton)
-	ON_BN_CLICKED(IDC_ADD_BUTTON, &CAboutDlg::OnBnClickedAddButton)
-	ON_BN_CLICKED(IDC_CLOSE_BUTTON, &CAboutDlg::OnBnClickedCloseButton)
-	ON_BN_CLICKED(IDC_SAVE_BUTTON, &CAboutDlg::OnBnClickedSaveButton)
 END_MESSAGE_MAP()
 
 // Команда приложения для запуска диалога
@@ -173,31 +162,3 @@ void Clr4App::OnAppAbout()
 
 // Обработчики сообщений Clr4App
 
-void CAboutDlg::OnBnClickedDeleteButton()
-{
-	// TODO: добавьте свой код обработчика уведомлений
-}
-
-
-void CAboutDlg::OnBnClickedEditButton()
-{
-	// TODO: добавьте свой код обработчика уведомлений
-}
-
-
-void CAboutDlg::OnBnClickedAddButton()
-{
-	// TODO: добавьте свой код обработчика уведомлений
-}
-
-
-void CAboutDlg::OnBnClickedCloseButton()
-{
-	// TODO: добавьте свой код обработчика уведомлений
-}
-
-
-void CAboutDlg::OnBnClickedSaveButton()
-{
-	// TODO: добавьте свой код обработчика уведомлений
-}
