@@ -98,7 +98,7 @@ void CMyDialog::FillListBox(int i) {
 		}
 	}
 	else {
-		EditShow(TRUE);
+		EditShow(FALSE);
 		EditNOwners.ShowWindow(SW_HIDE);
 		EditMileage.ShowWindow(SW_HIDE);
 	}
@@ -122,24 +122,29 @@ void CMyDialog::FillEdit(int n)
 		EditMileage.ShowWindow(SW_HIDE);
 		return;
 	}
-	if (n >= 0) {
-		EditMake.SetWindowTextW(pDoc->warehouse.GetCStr(n, 0));
-		EditModel.SetWindowTextW(pDoc->warehouse.GetCStr(n, 1));
-		EditPower.SetWindowTextW(pDoc->warehouse.GetCStr(n, 2));
-		EditEC.SetWindowTextW(pDoc->warehouse.GetCStr(n, 3));
-		EditPYear.SetWindowTextW(pDoc->warehouse.GetCStr(n, 4));
-		if (pDoc->warehouse.GetCStr(n, 5) != L"") {
-			EditNOwners.ShowWindow(SW_SHOW);
-			EditMileage.ShowWindow(SW_SHOW);
-			EditNOwners.SetWindowTextW(pDoc->warehouse.GetCStr(n, 5));
-			EditMileage.SetWindowTextW(pDoc->warehouse.GetCStr(n, 6));
-		}
-		else {
-			EditNOwners.ShowWindow(SW_HIDE);
-			EditMileage.ShowWindow(SW_HIDE);
-			EditNOwners.SetWindowTextW(L"");
-			EditMileage.SetWindowTextW(L"");
-		}
+	if (n < 0) {
+		ClearEdit();
+		EditShow(FALSE);
+		EditNOwners.ShowWindow(SW_HIDE);
+		EditMileage.ShowWindow(SW_HIDE);
+		return;
+	}
+	EditMake.SetWindowTextW(pDoc->warehouse.GetCStr(n, 0));
+	EditModel.SetWindowTextW(pDoc->warehouse.GetCStr(n, 1));
+	EditPower.SetWindowTextW(pDoc->warehouse.GetCStr(n, 2));
+	EditEC.SetWindowTextW(pDoc->warehouse.GetCStr(n, 3));
+	EditPYear.SetWindowTextW(pDoc->warehouse.GetCStr(n, 4));
+	if (pDoc->warehouse.GetCStr(n, 5) != L"") {
+		EditNOwners.ShowWindow(SW_SHOW);
+		EditMileage.ShowWindow(SW_SHOW);
+		EditNOwners.SetWindowTextW(pDoc->warehouse.GetCStr(n, 5));
+		EditMileage.SetWindowTextW(pDoc->warehouse.GetCStr(n, 6));
+	}
+	else {
+		EditNOwners.ShowWindow(SW_HIDE);
+		EditMileage.ShowWindow(SW_HIDE);
+		EditNOwners.SetWindowTextW(L"");
+		EditMileage.SetWindowTextW(L"");
 	}
 }
 
@@ -173,7 +178,7 @@ void CMyDialog::OnBnClickedSaveButton()
 	power = _wtoi(car[2]); ec = _wtof(car[3]); pyear = _wtoi(car[4]);
 	nOwners = _wtoi(car[5]); mileage = _wtof(car[6]);
 	if (car[0] == L"" || car[1] == L"") { flag = FALSE; }
-	else if (power >= 10000 || power <= 0 || pyear >= 2023 || pyear <= 1800 || ec <= 0.1 || ec >= 10) { flag == FALSE; }
+	else if (power >= 10000 || power <= 0 || pyear >= 2023 || pyear <= 1800 || ec <= 0.1 || ec >= 10) { flag = FALSE; }
 	else if (EditMileage.IsWindowVisible()) {
 		if (nOwners <= 0 || nOwners >= 1000 || mileage <= 0.0 || mileage >= 10000000.0) { flag = FALSE; }
 	}
@@ -185,14 +190,16 @@ void CMyDialog::OnBnClickedSaveButton()
 		FillEdit(n);
 	}
 	else {
-		if (n != m) {
+		if (m != pDoc->warehouse.Size()) {
 			ListBox1.DeleteString(n);
 			ListBox1.SetCurSel(n-1);
+			FillEdit(n-1);
 		}
 		else {
 			ListBox1.SetCurSel(n);
+			FillEdit(n);
 		}
-		FillEdit(n);
+
 	}
 }
 

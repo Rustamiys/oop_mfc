@@ -76,6 +76,7 @@ void Shaikhutdinov_Car::input() {
 	model = model1.c_str();
 }
 
+
 void Shaikhutdinov_Car::add(const vector<CString> car) {
 	make = car[0]; model = car[1]; power = _wtoi(car[2]);
 	engine_capacity = _wtof(car[3]); production_year = _wtoi(car[4]);

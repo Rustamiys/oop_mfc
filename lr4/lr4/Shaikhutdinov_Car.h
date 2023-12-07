@@ -11,7 +11,7 @@ public:
 	virtual ~Shaikhutdinov_Car();
 
 	virtual void input();
-	virtual void add(vector<CString>);
+	virtual void add(const vector<CString>);
 	virtual void print();
 	virtual	CString getCStr(int i);
 	virtual void Draw(CDC* pDC, int& i, vector<int> vec, int line_size, int y0);
