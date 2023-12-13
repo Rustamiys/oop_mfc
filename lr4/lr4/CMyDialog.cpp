@@ -5,6 +5,7 @@
 #include "lr4.h"
 #include "afxdialogex.h"
 #include "CMyDialog.h"
+#include <algorithm>
 
 
 // Диалоговое окно CMyDialog
@@ -91,11 +92,8 @@ void CMyDialog::FillListBox(int i) {
 	if (!pDoc->warehouse.Empty())
 	{
 		for (int i = 0; i < pDoc->warehouse.Size(); ++i)
-		{
-			CString s = pDoc->warehouse.GetCStr(i, 0) + L" " + pDoc->warehouse.GetCStr(i, 1);
-			ListBox1.AddString(s);
-			ListBox1.SetCurSel(i);
-		}
+			ListBox1.AddString(pDoc->warehouse.GetCStr(i, 0) + L" " + pDoc->warehouse.GetCStr(i, 1));
+		ListBox1.SetCurSel(pDoc->warehouse.Size());
 	}
 	else {
 		EditShow(FALSE);
@@ -106,6 +104,19 @@ void CMyDialog::FillListBox(int i) {
 
 void CMyDialog::OnLbnSelchangeList1()
 {
+	if (ListBox1.GetCount() != pDoc->warehouse.Size()) {
+		int m = ListBox1.GetCount();
+		int n = ListBox1.GetCurSel();
+		for (int i = 0; i < m; i++) {
+			CString str; ListBox1.GetText(i, str);
+			if (str == L"") {
+				ListBox1.DeleteString(i);
+				if (n > m - 1) {
+					ListBox1.SetCurSel(n - 1);
+				}
+			}
+		}
+	}
 	int n = ListBox1.GetCurSel();
 	if (n < 0 || (pDoc->warehouse.Size()!= ListBox1.GetCount()))
 		return;
@@ -190,6 +201,7 @@ void CMyDialog::OnBnClickedSaveButton()
 		FillEdit(n);
 	}
 	else {
+		MessageBox(L"Непрвильный ввод", L"Ошибка", MB_OK);
 		if (m != pDoc->warehouse.Size()) {
 			ListBox1.DeleteString(n);
 			ListBox1.SetCurSel(n-1);
@@ -224,6 +236,19 @@ void CMyDialog::OnBnClickedCloseButton()
 
 void CMyDialog::OnBnClickedAdducButton()
 {
+	if (ListBox1.GetCount() != pDoc->warehouse.Size()) { 
+		int m = ListBox1.GetCount();
+		int n = ListBox1.GetCurSel();
+		for (int i = 0; i < m; i++) {
+			CString str; ListBox1.GetText(i, str);
+			if (str == L"") {
+				ListBox1.DeleteString(i);
+				if (n > m-1) {
+					ListBox1.SetCurSel(n - 1);
+				}
+			}
+		}
+	}
 	ClearEdit();
 	ListBox1.AddString(L"");
 	ListBox1.SetCurSel(pDoc->warehouse.Size());
@@ -236,6 +261,19 @@ void CMyDialog::OnBnClickedAdducButton()
 
 void CMyDialog::OnBnClickedAddcButton()
 {
+	if (ListBox1.GetCount() != pDoc->warehouse.Size()) {
+		int m = ListBox1.GetCount();
+		int n = ListBox1.GetCurSel();
+		for (int i = 0; i < m; i++) {
+			CString str; ListBox1.GetText(i, str);
+			if (str == L"") {
+				ListBox1.DeleteString(i);
+				if (n > m - 1) {
+					ListBox1.SetCurSel(n - 1);
+				}
+			}
+		}
+	}
 	ClearEdit();
 	ListBox1.AddString(L"");
 	ListBox1.SetCurSel(pDoc->warehouse.Size());

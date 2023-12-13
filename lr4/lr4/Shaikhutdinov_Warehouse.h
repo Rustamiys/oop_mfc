@@ -19,5 +19,8 @@ public:
 	void AddObj(const vector<CString> vec, int n);
 	CSize Draw(CDC* pDC);
 	int MaxStr(CDC* pDC, int row, int max);
+	using ItemsIterator = typename std::vector<shared_ptr<Shaikhutdinov_Car>>::iterator;
+	ItemsIterator begin() { return warehouse.begin(); }
+	ItemsIterator end() { return warehouse.end(); }
 };
 

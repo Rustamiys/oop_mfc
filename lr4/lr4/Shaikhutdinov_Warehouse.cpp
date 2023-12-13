@@ -82,8 +82,8 @@ CSize Shaikhutdinov_Warehouse::Draw(CDC* pDC)
 	int i = 0;
 	y += lin_size;
 	lin_size += pos.y;
-	for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position, lin_size, y));
-
+	//for_each(warehouse.begin(), warehouse.end(), bind(&Shaikhutdinov_Car::Draw, placeholders::_1, pDC, i, position, lin_size, y));
+	for_each(warehouse.begin(), warehouse.end(), [&](shared_ptr<Shaikhutdinov_Car> car){ car->Draw(pDC, i, position, lin_size, y);});
 	pos.x = position[7] - col_size;
 	pos.y = (warehouse.size()) ? pos.y + y + lin_size * (warehouse.size() - 1) : y + pos.y - lin_size;
 	return pos;
@@ -139,3 +139,4 @@ void Shaikhutdinov_Warehouse::AddObj(const vector<CString> vec, int n) {
 		warehouse.push_back(pSC);
 	}
 }
+
