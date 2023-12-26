@@ -60,6 +60,7 @@ namespace lr5
         }
         public void Load(string fileName)
         {
+            warehouse.Clear();
             XmlSerializer serializer = new XmlSerializer(typeof(List<Car>));
             try
             {

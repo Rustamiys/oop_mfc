@@ -40,8 +40,8 @@ void Shaikhutdinov_UsedCar::input() {
 
 void Shaikhutdinov_UsedCar::add(const vector<CString> car) {
 	Shaikhutdinov_Car::add(car);
-	number_of_owners = _wtoi(car[2]);
-	mileage = _wtof(car[3]);
+	number_of_owners = _wtoi(car[5]);
+	mileage = _wtof(car[6]);
 }
 
 void Shaikhutdinov_UsedCar::print() {

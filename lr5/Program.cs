@@ -20,7 +20,7 @@ namespace lr5
             Warehouse Warehouse = new Warehouse();
             while (true)
             {
-                Console.WriteLine("1) Добавить машину\n2) Удалить\n3) Очистить все\n4) Вывести все\n5) Сохранить\n6) Загрузить");
+                Console.WriteLine("1) Добавить машину\n2) Удалить\n3) Очистить все\n4) Вывести все\n5) Сохранить\n6) Загрузить\n0)Выход");
                 Console.Write("Выберите пункт: ");
 
                 string input_text = Console.ReadLine();
@@ -28,6 +28,8 @@ namespace lr5
 
                 switch (num)
                 {
+                    case 0:
+                        return;
                     case 1:
                         Console.WriteLine("1) Новая машина\n2) Б/у машины");
                         Console.Write("Выберите: ");
